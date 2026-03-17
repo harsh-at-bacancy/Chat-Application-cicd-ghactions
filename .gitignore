@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Logs and databases
+*.log
+npm-debug.log*
+.env
+.env.test
+.env.local
+
+# Coverage and build directories
+coverage/
+dist/
+build/
+.next/
+.nuxt/
+
+# IDE and OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Cache and temporary files
+.cache/
+.npm/
+.yarn/
+.eslintcache
+
