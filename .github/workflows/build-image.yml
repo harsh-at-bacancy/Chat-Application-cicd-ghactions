@@ -48,7 +48,7 @@ jobs:
     needs: [build-frontend, build-backend]
     steps:
       - name: Deploy to server
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthe/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SOURCE: "."
