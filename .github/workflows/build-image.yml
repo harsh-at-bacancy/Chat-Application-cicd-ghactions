@@ -43,6 +43,8 @@ jobs:
           context: "{{defaultContext}}:frontend"
           push: true
           tags: ${{ env.FRONTEND_IMAGE_TAG }}
+          build-args: |
+            VITE_BASE_API=http://${{ secrets.EC2_HOST }}:${{ secrets.PORT }}
 
   deploy:
     runs-on: ubuntu-latest
