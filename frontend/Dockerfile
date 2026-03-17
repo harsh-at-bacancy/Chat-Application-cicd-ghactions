@@ -10,9 +10,10 @@ ARG VITE_BASE_API
 
 COPY . .
 
-RUN npm run build
+CMD ["npm", "run", "dev"]
+#RUN npm run build
 
 
-FROM nginx:alpine 
+#FROM nginx:alpine 
 
-COPY --from=base /app/dist /usr/share/nginx/html
+#COPY --from=base /app/dist /usr/share/nginx/html
