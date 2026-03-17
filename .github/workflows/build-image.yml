@@ -55,16 +55,14 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SOURCE: "."
+          SOURCE: "docker-compose.yaml"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           TARGET: /home/ec2-user
-          EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
             whoami
             ls -al
-          SCRIPT_AFTER: |
-            whoami
-            ls -al
-            echo $RSYNC_STDOUT
-      
+          SCRIPT_AFTER: | 
+            export BACKEND_IMAGE_TAG=${{ BACKEND_IMAGE_TAG }}
+            export FRONTEND_IMAGE_TAG=${{ FRONTEND_IMAGE_TAG }}
+            docker compose up
