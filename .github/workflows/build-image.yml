@@ -23,7 +23,7 @@ jobs:
         with:
           context: "{{defaultContext}}:backend"
           push: true
-          tags: $BACKEND_IMAGE_TAG
+          tags: ${{ env.BACKEND_IMAGE_TAG }}
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -42,4 +42,4 @@ jobs:
         with:
           context: "{{defaultContext}}:frontend"
           push: true
-          tags: $FRONTEND_IMAGE_TAG
+          tags: ${{ env.FRONTEND_IMAGE_TAG }}
