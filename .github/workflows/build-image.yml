@@ -72,4 +72,5 @@ jobs:
             export CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
             export CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
             export CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+            env
             docker compose up
