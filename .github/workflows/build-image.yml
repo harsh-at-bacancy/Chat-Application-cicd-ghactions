@@ -2,8 +2,11 @@ name: Create docker image and push it to the registry
 on:
   push:
     branches: [main]
+env:
+  BACKEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend:latest
+  FRONTEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-frontend:latest
 jobs:
-  build:
+  build-backend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,4 +23,23 @@ jobs:
         with:
           context: "{{defaultContext}}:backend"
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend:latest
+          tags: $BACKEND_IMAGE_TAG
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Login to dockerhub 
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7
+        with:
+          context: "{{defaultContext}}:frontend"
+          push: true
+          tags: $FRONTEND_IMAGE_TAG
