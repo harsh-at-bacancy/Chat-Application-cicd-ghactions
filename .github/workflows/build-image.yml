@@ -63,8 +63,8 @@ jobs:
             whoami
             ls -al
           SCRIPT_AFTER: |
-            export BACKEND_IMAGE_TAG=${{ secrets.BACKEND_IMAGE_TAG }}
-            export FRONTEND_IMAGE_TAG=${{ secrets.FRONTEND_IMAGE_TAG }}
+            export BACKEND_IMAGE_TAG=${{ env.BACKEND_IMAGE_TAG }}
+            export FRONTEND_IMAGE_TAG=${{ env.FRONTEND_IMAGE_TAG }}
             export MONGODB_URI=${{ secrets.MONGODB_URI }}
             export PORT=${{ secrets.PORT }}
             export JWT_SECRET=${{ secrets.JWT_SECRET }}
