@@ -1,0 +1,23 @@
+name: Create docker image and push it to the registry
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Login to dockerhub 
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7
+        with:
+          context: "{{defaultContext}}:backend"
+          push: true
+          tags: user/app:latest
