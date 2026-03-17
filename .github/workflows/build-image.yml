@@ -63,13 +63,13 @@ jobs:
             whoami
             ls -al
           SCRIPT_AFTER: |
-            export BACKEND_IMAGE_TAG=${{ env.BACKEND_IMAGE_TAG }}
-            export FRONTEND_IMAGE_TAG=${{ env.FRONTEND_IMAGE_TAG }}
-            export MONGODB_URI=${{ env.MONGODB_URI }}
-            export PORT=${{ env.PORT }}
-            export JWT_SECRET=${{ env.JWT_SECRET }}
-            export NODE_ENV=${{ env.NODE_ENV }}
-            export CLOUDINARY_CLOUD_NAME=${{ env.CLOUDINARY_CLOUD_NAME }}
-            export CLOUDINARY_API_KEY=${{ env.CLOUDINARY_API_KEY }}
-            export CLOUDINARY_API_SECRET=${{ env.CLOUDINARY_API_SECRET }}
+            export BACKEND_IMAGE_TAG=${{ secrets.BACKEND_IMAGE_TAG }}
+            export FRONTEND_IMAGE_TAG=${{ secrets.FRONTEND_IMAGE_TAG }}
+            export MONGODB_URI=${{ secrets.MONGODB_URI }}
+            export PORT=${{ secrets.PORT }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export NODE_ENV=${{ secrets.NODE_ENV }}
+            export CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
+            export CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+            export CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
             docker compose up
