@@ -22,9 +22,11 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v7
         with:
-          context: "{{defaultContext}}:backend"
+          context: "./backend"
           push: true
           tags: ${{ env.BACKEND_IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -41,11 +43,13 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v7
         with:
-          context: "{{defaultContext}}:frontend"
+          context: "./frontend"
           push: true
           tags: ${{ env.FRONTEND_IMAGE_TAG }}
           build-args: |
             VITE_BASE_API=http://${{ secrets.EC2_HOST }}:${{ secrets.PORT }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,14 +70,16 @@ jobs:
             whoami
             ls -al
           SCRIPT_AFTER: |
-            export BACKEND_IMAGE_TAG=${{ env.BACKEND_IMAGE_TAG }}
-            export FRONTEND_IMAGE_TAG=${{ env.FRONTEND_IMAGE_TAG }}
-            export MONGODB_URI=${{ secrets.MONGODB_URI }}
-            export PORT=${{ secrets.PORT }}
-            export JWT_SECRET=${{ secrets.JWT_SECRET }}
-            export NODE_ENV=${{ secrets.NODE_ENV }}
-            export CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
-            export CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
-            export CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+            cat <<EOF > .env
+            BACKEND_IMAGE_TAG=${{ env.BACKEND_IMAGE_TAG }}
+            FRONTEND_IMAGE_TAG=${{ env.FRONTEND_IMAGE_TAG }}
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            PORT=${{ secrets.PORT }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            NODE_ENV=${{ secrets.NODE_ENV }}
+            CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
+            CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+            CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+            EOF
             env
             docker compose up -d --pull=always
