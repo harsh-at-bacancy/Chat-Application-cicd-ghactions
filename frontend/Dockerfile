@@ -7,6 +7,8 @@ COPY package.json .
 RUN npm install
 
 ARG VITE_BASE_API
+ENV VITE_BASE_API=$VITE_BASE_API
+
 
 COPY . .
 
