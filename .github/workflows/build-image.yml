@@ -4,8 +4,8 @@ on:
     branches: [main]
   workflow_dispatch:
 env:
-  BACKEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend:latest
-  FRONTEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-frontend:latest
+  BACKEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend
+  FRONTEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-frontend
 jobs:
   build-backend:
     runs-on: ubuntu-latest
