@@ -2,6 +2,7 @@ name: Create docker image and push it to the registry
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 env:
   BACKEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend:latest
   FRONTEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-frontend:latest
