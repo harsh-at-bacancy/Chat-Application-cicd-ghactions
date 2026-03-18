@@ -76,4 +76,4 @@ jobs:
             export CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
             export CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
             env
-            docker compose up --pull=always
+            docker compose -d up --pull=always
