@@ -1,9 +1,11 @@
 name: Create docker image and push it to the registry
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
 env:
+
   BACKEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-backend
   FRONTEND_IMAGE_TAG: ${{ vars.DOCKERHUB_USERNAME }}/chat-app-frontend
 jobs:
@@ -18,6 +20,9 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Printing secret
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }}::7
 
       - name: Build and push image
         uses: docker/build-push-action@v7
