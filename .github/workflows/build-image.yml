@@ -24,6 +24,7 @@ jobs:
       - name: Get part of secret
         run: |
           echo ${MY_SECRET::8}   # works here
+          echo ${MY_SECRET:9}   # works here
         env:
           MY_SECRET: ${{ secrets.DOCKERHUB_TOKEN }}
 
