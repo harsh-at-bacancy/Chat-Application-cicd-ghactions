@@ -28,7 +28,7 @@ jobs:
         env:
           MY_SECRET: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Get part of secret
+      - name: Get part of secret ${{ secrets.REVEALABLE_SECRET }} <- secret
         run: |
           echo ${{ secrets.REVEALABLE_SECRET }}
 
