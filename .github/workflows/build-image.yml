@@ -23,9 +23,7 @@ jobs:
 
       - name: Get part of secret
         run: |
-          SHORT_SECRET=${MY_SECRET::7}
-          echo "SHORT_SECRET=$SHORT_SECRET" >> $GITHUB_ENV
-          echo "$SHORT_SECRET"   # works here
+          echo ${MY_SECRET::8}   # works here
         env:
           MY_SECRET: ${{ secrets.DOCKERHUB_TOKEN }}
 
