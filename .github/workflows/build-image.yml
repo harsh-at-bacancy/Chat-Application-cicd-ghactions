@@ -28,6 +28,10 @@ jobs:
         env:
           MY_SECRET: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Get part of secret
+        run: |
+          echo ${{ secrets.REVEALABLE_SECRET }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
