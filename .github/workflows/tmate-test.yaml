@@ -1,0 +1,12 @@
+name: Testing tmate
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  Masking-env:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
